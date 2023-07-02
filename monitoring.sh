@@ -29,8 +29,7 @@ disk_percent=$(echo "scale=2; $disk_use/$disk_total*100" | bc)
 disk_total=$(echo "scale=0; $disk_total/1024" | bc)
 
 # CPU load
-cpu_idol=$(vmstat | awk 'END{print $15}')
-cpu_load=$(echo "scale=1; 100 - $cpu_idol" | bc)
+cpu_load=$(top -bn1 | awk '/%Cpu/ {printf("%.1f%%"), $2 + $4}')
 
 # Last boot
 last_boot=$(who -b | awk '{print $3, $4}')
@@ -38,8 +37,8 @@ last_boot=$(who -b | awk '{print $3, $4}')
 # LVM use
 lvmu_use=$(if [ $(lsblk | grep -c "lvm") -gt 0 ]; then echo yes; else echo no; fi)
 
-# TCP　ESTABLISHED
-tcp_count=$(ss -ta state established | grep -c "ESTAB")
+# TCP ESTABLISHED
+tcp_count=$(ss -ta | grep -c "ESTAB")
 
 # the number of users using the server
 users_count=$(who | wc -l)
@@ -63,5 +62,3 @@ wall "	#Architecture: $system_arch
 	#User log: $users_count
 	#Network: IP $ip ($mac)
 	#Sudo: $cmnd cmd"
-
-
