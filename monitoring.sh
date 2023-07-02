@@ -55,7 +55,7 @@ wall "	#Architecture: $system_arch
 	#vCPU: $virtual_cpu_count
 	#Memory Usage: $ram_use/${ram_total}MB ($ram_percent%)
 	#Disk Usage: $disk_use/${disk_total}Gb ($disk_percent%)
-	#CPU load: $cpu_load%
+	#CPU load: $cpu_load
 	#Last boot: $last_boot
 	#LVM use: $lvmu_use
 	#Connections TCP: $tcp_count ESTABLISHED
